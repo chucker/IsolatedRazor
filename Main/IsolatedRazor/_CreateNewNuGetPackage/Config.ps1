@@ -16,23 +16,16 @@
 # Specify the Version Number to use for the NuGet package. If not specified, the version number of the assembly being packed will be used.
 # NuGet version number guidance: https://docs.nuget.org/docs/reference/versioning and the Semantic Versioning spec: http://semver.org/
 # e.g. "" (use assembly's version), "1.2.3" (stable version), "1.2.3-alpha" (prerelease version).
-$versionNumber = "1.1.1.0"
+$versionNumber = "1.2-alpha1"
 
-# Specify any Release Notes for this package.
+# Specify any Release Notes for this package. 
 # These will only be included in the package if you have a .nuspec file for the project in the same directory as the project file.
-$releaseNotes = "V 1.1.1.0:
-	- 'ForbiddenTypes' extended to disallow (by default) the usage of System.Activator and Assembly
-
-V 1.1.0.0:
-	- 'ForbiddenTypes' added to disallow (by default) the usage of Tasks and Threads
-
-V 1.0.1.0:
-	- Fix crash when template directory does not exist."
+$releaseNotes = ""
 
 # Specify a specific Configuration and/or Platform to only create a NuGet package when building the project with this Configuration and/or Platform.
 #	e.g. $configuration = "Release"
-#		 $platform = "Any CPU"
-$configuration = "Release"
+#		 $platform = "AnyCPU"
+$configuration = ""
 $platform = ""
 
 # Specify any NuGet Pack Properties to pass to MsBuild.
@@ -42,12 +35,19 @@ $platform = ""
 $packProperties = ""
 
 # Specify any NuGet Pack options to pass to nuget.exe.
-#	e.g. $packOptions = "-IncludeReferencedProjects"
+#	e.g. $packOptions = "-Symbols"
+#	e.g. $packOptions = "-IncludeReferencedProjects -Symbols"
 # Do not specify a "-Version" (use $versionNumber above), "-OutputDirectory", or "-NonInteractive", as these are already provided.
 # Do not specify any "-Properties" here; instead use the $packProperties variable above.
 # Do not specify "-Build", as this may result in an infinite build loop.
 # NuGet Pack options that can be specified: http://docs.nuget.org/docs/reference/command-line-reference#Pack_Command_Options
+# Use "-Symbols" to also create a symbols package. When pushing your package, the symbols package will automatically be detected and pushed as well: https://www.symbolsource.org/Public/Wiki/Publishing
 $packOptions = ""
+
+# Specify $true if the generated .nupkg file should be renamed to include the Configuration and Platform that was used to build the project, $false if not.
+#	e.g. If $true, MyProject.1.1.5.6.nupkg might be renamed to MyProject.1.1.5.6.Debug.AnyCPU.nupkg
+#	e.g. If $true, MyProject.1.1.5.6-beta1.nupkg might re renamed to MyProject.1.1.5.6-beta1.Release.x86.nupkg
+$appendConfigurationAndPlatformToNuGetPackageFileName = $true
 
 
 #------------------------------------------------

@@ -94,7 +94,9 @@ namespace IsolatedRazor
 			var host = new RazorEngineHost(language ?? new CSharpRazorCodeLanguage()) { DefaultNamespace = templateNamespace };
 			DefaultNamespaces.ForEach(n => host.NamespaceImports.Add(n));
 			engine = new RazorTemplateEngine(host);
-			provider = host.CodeLanguage.LanguageName == "vb" ? (CodeDomProvider)new VBCodeProvider() : new CSharpCodeProvider();
+			provider = host.CodeLanguage.LanguageName == "vb" ?
+                       (CodeDomProvider)new Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider() :
+                       new Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider();
 
 			adSetup = new AppDomainSetup();
 			if (AppDomain.CurrentDomain.SetupInformation.ShadowCopyFiles == "true")
